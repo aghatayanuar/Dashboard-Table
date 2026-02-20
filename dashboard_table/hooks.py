@@ -28,6 +28,8 @@ app_license = "mit"
 # app_include_css = "/assets/dashboard_table/css/dashboard_table.css"
 # app_include_js = "/assets/dashboard_table/js/dashboard_table.js"
 
+app_include_js = "/assets/dashboard_table/js/dashboard_table.js"
+
 # include js, css files in header of web template
 # web_include_css = "/assets/dashboard_table/css/dashboard_table.css"
 # web_include_js = "/assets/dashboard_table/js/dashboard_table.js"

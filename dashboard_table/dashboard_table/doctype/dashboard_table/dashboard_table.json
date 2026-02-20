@@ -1,0 +1,64 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:dashboard_name",
+ "creation": "2026-02-18 16:03:31.671501",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "dashboard_name",
+  "report_name",
+  "filter_json"
+ ],
+ "fields": [
+  {
+   "fieldname": "dashboard_name",
+   "fieldtype": "Data",
+   "label": "Dashboard Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "report_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Report Name",
+   "options": "Report",
+   "reqd": 1
+  },
+  {
+   "description": "Example:\n\n{\n  \"company\": \"das\",\n  \"from_date\": \"2025-12-01\",\n  \"to_date\": \"2026-01-30\",\n}\n",
+   "fieldname": "filter_json",
+   "fieldtype": "Code",
+   "label": "Filter JSON"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-02-20 11:18:20.837581",
+ "modified_by": "Administrator",
+ "module": "Dashboard Table",
+ "name": "Dashboard Table",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
