@@ -76,7 +76,6 @@ if (!document.getElementById("custom-workspace-table-style")) {
     document.head.appendChild(style);
 }
 
-// Trigger init saat route change
 frappe.router.on("change", () => {
     console.log("Init custom tables triggered");
     init_module_tables();
@@ -102,7 +101,7 @@ function init_module_tables() {
 async function wait_for_module_render(module_name) {
 
     let tries = 0;
-    const MAX_TRIES = 20; // 20 x 150ms ≈ 3 detik
+    const MAX_TRIES = 20; 
 
     const interval = setInterval(async () => {
 
@@ -118,8 +117,6 @@ async function wait_for_module_render(module_name) {
             `div[onboarding_name="${module_name}"]`
         );
 
-        // 🔵 Kalau onboarding ada → langsung lanjut
-        // 🔵 Kalau belum ada tapi belum timeout → tunggu
         if (!onboarding && tries < MAX_TRIES) {
             tries++;
             return;
@@ -127,7 +124,6 @@ async function wait_for_module_render(module_name) {
 
         clearInterval(interval);
 
-        // ✅ HAPUS GRID LAMA (anti duplicate)
         document
             .querySelectorAll(
                 `.custom-report-grid-block[data-module="${module_name}"]`
@@ -145,14 +141,12 @@ async function wait_for_module_render(module_name) {
                 return;
             }
 
-            // 🔎 Tentukan anchor
             let insert_after_block = null;
 
             if (onboarding) {
                 insert_after_block = onboarding.closest(".ce-block");
             }
 
-            // 🔵 Buat wrapper grid
             const grid_block = document.createElement("div");
             grid_block.className = "ce-block custom-report-grid-block";
             grid_block.dataset.module = module_name;
@@ -177,7 +171,6 @@ async function wait_for_module_render(module_name) {
 
             const grid = grid_block.querySelector(".custom-report-grid");
 
-            // 🔁 LOOP REPORT
             for (const row of dashboard_doc.custom_report_tables) {
 
                 if (!row.report_table) continue;
@@ -197,7 +190,7 @@ async function wait_for_module_render(module_name) {
                     }
 
                     const result = await frappe.call({
-                        method: "frappe.desk.query_report.run",
+                        method: "dashboard_table.api.run_limited_report",
                         args: {
                             report_name: table_doc.report_name,
                             filters: filters

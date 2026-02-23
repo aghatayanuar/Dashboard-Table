@@ -148,7 +148,7 @@ async function render_custom_group(dashboard_graph, dashboard_doc) {
         try {
 
             const result = await frappe.call({
-                method: "frappe.desk.query_report.run",
+                method: "dashboard_table.api.run_limited_report",
                 args: {
                     report_name: table_doc.report_name,
                     filters: JSON.parse(table_doc.filter_json || "{}")
