@@ -76,10 +76,14 @@ if (!document.getElementById("custom-workspace-table-style")) {
     document.head.appendChild(style);
 }
 
-frappe.router.on("change", () => {
-    console.log("Init custom tables triggered");
-    init_module_tables();
-});
+if (!window.__workspace_table_router_bound) {
+    window.__workspace_table_router_bound = true;
+
+    frappe.router.on("change", () => {
+        console.log("Init custom tables triggered");
+        init_module_tables();
+    });
+}
 
 function init_module_tables() {
     const route = frappe.get_route(true); 
@@ -90,10 +94,6 @@ function init_module_tables() {
 
     const module_name = route[1];
     console.log("Module route detected:", module_name);
-
-    if( module_name === "Home" ){
-        return;
-    }
 
     wait_for_module_render(module_name);
 }
@@ -132,6 +132,11 @@ async function wait_for_module_render(module_name) {
 
         try {
 
+            const exists = await frappe.db.exists("Dashboard", module_name);
+            if (!exists) {
+                return;
+            }
+
             const dashboard_doc = await frappe.db.get_doc(
                 "Dashboard",
                 module_name
@@ -147,7 +152,12 @@ async function wait_for_module_render(module_name) {
                 insert_after_block = onboarding.closest(".ce-block");
             }
 
+            document
+                .querySelectorAll(`.custom-report-grid-block[data-module="${module_name}"]`)
+                .forEach(el => el.remove());
+
             const grid_block = document.createElement("div");
+
             grid_block.className = "ce-block custom-report-grid-block";
             grid_block.dataset.module = module_name;
 
