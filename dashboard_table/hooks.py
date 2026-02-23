@@ -28,7 +28,10 @@ app_license = "mit"
 # app_include_css = "/assets/dashboard_table/css/dashboard_table.css"
 # app_include_js = "/assets/dashboard_table/js/dashboard_table.js"
 
-app_include_js = "/assets/dashboard_table/js/dashboard_table.js"
+app_include_js = [
+    "/assets/dashboard_table/js/dashboard_table.js",
+    "/assets/dashboard_table/js/workspace_table.js",
+]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/dashboard_table/css/dashboard_table.css"
@@ -86,6 +89,8 @@ app_include_js = "/assets/dashboard_table/js/dashboard_table.js"
 
 # before_install = "dashboard_table.install.before_install"
 # after_install = "dashboard_table.install.after_install"
+
+after_install = "dashboard_table.install.after_install"
 
 # Uninstallation
 # ------------
